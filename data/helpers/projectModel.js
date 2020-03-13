@@ -6,6 +6,7 @@ module.exports = {
   insert,
   update,
   remove,
+  getById,
   getProjectActions,
 };
 
@@ -17,7 +18,7 @@ function get(id) {
 
     const promises = [query, getProjectActions(id)]; // [ projects, actions ]
 
-    return Promise.all(promises).then(function(results) {
+    return Promise.all(promises).then(function (results) {
       let [project, actions] = results;
 
       if (project) {
@@ -33,6 +34,14 @@ function get(id) {
       return projects.map(project => mappers.projectToBody(project));
     });
   }
+}
+
+function getById(id) {
+  return db('projects')
+    .where({
+      id
+    })
+    .first();
 }
 
 function insert(project) {

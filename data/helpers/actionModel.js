@@ -6,6 +6,7 @@ module.exports = {
   insert,
   update,
   remove,
+  getById
 };
 
 function get(id) {
@@ -27,6 +28,14 @@ function get(id) {
       return actions.map(action => mappers.actionToBody(action));
     });
   }
+}
+
+function getById(id) {
+  return db('actions')
+    .where({
+      id
+    })
+    .first();
 }
 
 function insert(action) {

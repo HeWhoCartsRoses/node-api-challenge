@@ -39,13 +39,15 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your Team Lead.
 
 - [ ] Mention two parts of Express that you learned about this week.
-
+      req, res
+      but seriously, it is similar to react with routes, and how it controls the application and what we learn
+      there isnt a whole lot ive learned about how this one is different than the others due to lack of knowledge in other RESTful api frameworks.
 - [ ] Describe Middleware?
       a thing that happens during the request before it hits the server to circumvent having to go to the server
 - [ ] Describe a Resource?
-
+      a abject with associated data and methods that operate in it
 - [ ] What can the API return to help clients know if a request was successful?
-      200
+      201
 - [ ] How can we partition our application into sub-applications?
       by using router
 
@@ -56,9 +58,9 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 Design and build the necessary endpoints to:
 
-- [ ] Perform CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`.
-      If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
-- [ ] Retrieve the list of actions for a project.
+^ [ ] Perform CRUD operations on _projects_ and _actions_. When adding an action, make sure the `project_id` provided belongs to an existing `project`.
+If you try to add an action with an `id` of 3 and there is no project with that `id` the database will return an error.
+^ [ ] Retrieve the list of actions for a project.
 
 Please read the following sections before implementing the Minimum Viable Product, they describe how the database is structured and the files and methods available for interacting with the data.
 

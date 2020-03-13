@@ -7,8 +7,19 @@ const {
     validateAction
 } = require("../middle/middle.js");
 const router = express.Router();
-router.post("/", validateAction, (req, res) => {});
-router.post("/:id/posts", validateActionId, (req, res) => {});
+router.post("/", validateAction, (req, res) => {
+    action
+        .insert(req.body)
+        .then(newUser => {
+            res.status(201).json(newUser);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                message: 'Could not create action'
+            });
+        });
+});
 router.get("/", (req, res) => {
     action
         .get()
@@ -18,12 +29,36 @@ router.get("/", (req, res) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({
-                message: "Could not get user"
+                message: "Could not get action"
             });
         });
 });
-router.get("/:id", (req, res) => {});
-router.get("/:id/posts", (req, res) => {});
-router.delete("/:id", (req, res) => {});
-router.put("/:id", (req, res) => {});
+router.get("/:id", validateActionId, (req, res) => {
+    res.status(200).json(req.action)
+});
+router.delete("/:id", validateActionId, (req, res) => {
+    action
+        .remove(req.params.id)
+        .then(user => {
+            res.status(201).json(user);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json({
+                message: 'Cannot delete action'
+            });
+        });
+});
+router.put("/:id", validateAction, (req, res) => {
+    action
+        .update(req.params.id, req.body)
+        .then(user => {
+            res.status(201).json(user);
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: 'Cannot edit action'
+            });
+        });
+});
 module.exports = router;

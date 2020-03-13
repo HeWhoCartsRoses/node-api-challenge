@@ -5,7 +5,7 @@ module.exports = {
     validateProjectId,
     validateActionId,
     validateAction,
-    validatePost
+    validateProject
 };
 
 function logger(req, res, next) {
@@ -16,7 +16,7 @@ function logger(req, res, next) {
 function validateProjectId(req, res, next) {
     projects.getById(req.params.id).then(thing => {
         if (thing) {
-            req.user = thing;
+            req.project = thing;
             next();
         } else {
             return res.status(400).json({
@@ -29,7 +29,7 @@ function validateProjectId(req, res, next) {
 function validateActionId(req, res, next) {
     actions.getById(req.params.id).then(thing => {
         if (thing) {
-            req.user = thing;
+            req.action = thing;
             next();
         } else {
             return res.status(400).json({
@@ -74,7 +74,7 @@ function validateAction(req, res, next) {
     if (req.body) return next();
 }
 
-function validatePost(req, res, next) {
+function validateProject(req, res, next) {
     if (!req.body) {
         return res.status(400).json({
             message: "missing post data"
